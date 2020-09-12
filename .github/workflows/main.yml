@@ -12,7 +12,7 @@ jobs:
       id: search_and_delete
       uses: longht021189/github_actions-delete_completed_branches@0.0.2
       with:
-        github_token: ${{github.token}}
+        github-token: ${{github.token}}
         master-name: 'master'
         expired-time: 31
 
