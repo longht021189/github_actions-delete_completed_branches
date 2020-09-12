@@ -1,6 +1,9 @@
 name: 'Delete Completed Branches'
 description: 'Delete all branches that are merged into master'
 inputs:
+  github-token:
+    description: 'Github Token'
+    required: true
   master-name:
     description: 'Name of master branch'
     required: true
