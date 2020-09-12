@@ -12,8 +12,11 @@ outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.master-name }}
-    - ${{ inputs.expired-time }}
+  using: 'node12'
+  main: 'dist/index.js'
+
+  # using: 'docker'
+  # image: 'Dockerfile'
+  # args:
+  #   - ${{ inputs.master-name }}
+  #   - ${{ inputs.expired-time }}
