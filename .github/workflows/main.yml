@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Clean old branches with acions
       id: search_and_delete
-      uses: longht021189/github_actions-delete_completed_branches@0.0.3
+      uses: longht021189/github_actions-delete_completed_branches@0.0.4
       with:
         github-token: ${{github.token}}
         master-name: 'master'
