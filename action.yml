@@ -1,11 +1,13 @@
-# action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Delete Completed Branches'
+description: 'Delete all branches that are merged into master'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  master-name:
+    description: 'Name of master branch'
     required: true
-    default: 'World'
+  expired-time:
+    description: 'Expired Time (day)'
+    required: true
+    default: 30
 outputs:
   time: # id of output
     description: 'The time we greeted you'
@@ -13,4 +15,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.master-name }}
+    - ${{ inputs.expired-time }}
