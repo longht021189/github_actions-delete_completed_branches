@@ -7,7 +7,7 @@ async function run() {
     const expiredTime = core.getInput('expired-time', { required: true });
     const githubToken = core.getInput('github-token', { required: true });
   
-    const client = github.getOctokit(github_token);
+    const client = github.getOctokit(githubToken);
     const repo = github.context.repo;
     const list = await client.repos.listBranches()
   
