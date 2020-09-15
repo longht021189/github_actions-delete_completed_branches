@@ -5,7 +5,7 @@ async function run() {
   try {
     const masterName = core.getInput('master-name', { required: true });
     const expiredTime = core.getInput('expired-time', { required: true });
-    const githubToken = core.getInput("github-token", { required: true });
+    const githubToken = core.getInput('github-token', { required: true });
   
     const client = github.getOctokit(github_token);
     const repo = github.context.repo;
