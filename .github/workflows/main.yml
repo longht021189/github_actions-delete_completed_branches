@@ -16,7 +16,7 @@ jobs:
       id: search_and_delete
       uses: ./
       with:
-        # github-token: ${{github.token}}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         master-name: 'master'
         expired-time: 31
 
