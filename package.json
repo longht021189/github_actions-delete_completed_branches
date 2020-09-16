@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node node_modules/.bin/ncc build index.js -m -q"
+    "build": "node node_modules/.bin/ncc build src/index.js -m -q -o ."
   },
   "repository": {
     "type": "git",
