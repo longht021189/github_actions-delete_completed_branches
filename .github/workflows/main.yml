@@ -14,7 +14,7 @@ jobs:
 
     - name: Clean old branches with acions
       id: search_and_delete
-      uses: ./
+      uses: ./../../
       with:
         github-token: ${{github.token}}
         master-name: 'master'
