@@ -15,10 +15,10 @@ jobs:
     - name: Clean old branches with acions
       id: search_and_delete
       uses: ./
-      with:
-        github-token: ${{github.token}}
-        master-name: 'master'
-        expired-time: 31
+      # with:
+      #   github-token: ${{github.token}}
+      #   master-name: 'master'
+      #   expired-time: 31
 
     # - name: Get the output time
     #   run: echo "The time was ${{ steps.search_and_delete.outputs.time }}"
