@@ -11,7 +11,22 @@ async function run() {
   const githubToken = core.getInput('github-token', { required: true });
   console.log(`githubToken = ${githubToken}`);
 
-  const client = github.getOctokit(githubToken);
+  const client = github.getOctokit(githubToken, {
+    log: {
+      debug: (message) => {
+        console.log(`debug: ${message}`);
+      },
+      info: (message) => {
+        console.log(`info: ${message}`);
+      },
+      warn: (message) => {
+        console.log(`warn: ${message}`);
+      },
+      error: (message) => {
+        console.log(`error: ${message}`);
+      }
+    }
+  });
   console.log(`client = ${client}`);
 
   const list = await client.repos.listBranches()
