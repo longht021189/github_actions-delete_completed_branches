@@ -26,21 +26,21 @@ async function run() {
   });
   console.log(`client = ${client}`);
 
-  // const { headers } = await octokit.request('/');
-  // console.log(`Scopes: ${headers['x-oauth-scopes']}`);
-
   const list = await client.repos.listBranches({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo
   });
-  console.log(`list = ${list}`);
+  console.log(`list = ${JSON.stringify(list)}`);
+
+  const payload = JSON.stringify(github.context.payload, undefined, 2)
+  console.log(`The event payload: ${payload}`);
   
   //   const repo = github.context.repo;
   //   console.log(`Hello , !`);
   //   // const time = (new Date()).toTimeString();
   //   // core.setOutput("time", time);
-  //   const payload = JSON.stringify(github.context.payload, undefined, 2)
-  //   console.log(`The event payload: ${payload}`);
+  //   
+  //   
   // } catch (error) {
   //   core.setFailed(error.message);
   // }
