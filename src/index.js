@@ -40,13 +40,13 @@ async function run() {
       console.log(`ahead_by: ${JSON.stringify(data.ahead_by)}`);
       console.log(`behind_by: ${JSON.stringify(data.behind_by)}`);
 
-      const data2 = (await client.repos.getCommit({
+      const date = (await client.repos.getCommit({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         ref: branch.commit.sha
-      })).data;
+      })).data.commit.committer.date;
 
-      console.log(`data2: ${JSON.stringify(data2)}`);
+      console.log(`date: ${JSON.stringify(date)}`);
     }
   }
 
