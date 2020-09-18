@@ -22,13 +22,17 @@ async function run() {
     repo: github.context.repo.repo
   })).data;
 
-  const list2 = (await client.repos.listBranchesForHeadCommit({
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-    commit_sha: list[0].commit.sha
-  }));
-
-  console.log(`list2: ${JSON.stringify(list2)}`);
+  for (const value of list) {
+    if (value.name != masterName) {
+      const list2 = (await client.repos.listBranchesForHeadCommit({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        commit_sha: value.commit.sha
+      })).data;
+    
+      console.log(`list2: ${JSON.stringify(list2)}`);
+    }
+  }
 
   // const payload = JSON.stringify(github.context.payload, undefined, 2)
   // console.log(`The event payload: ${payload}`);
