@@ -10,6 +10,10 @@ async function run() {
 
   const githubToken = core.getInput('github-token', { required: true });
   console.log(`githubToken = ${githubToken}`);
+  
+
+  // const myRepoID = context.repo({number: github.context.payload.repository.id})
+  // await github.context.repo.owner.github.repos.listBranches(myRepoID)
 
   const client = github.getOctokit(githubToken, {
     baseUrl: 'https://api.github.com',
@@ -25,7 +29,10 @@ async function run() {
   // const { headers } = await octokit.request('/');
   // console.log(`Scopes: ${headers['x-oauth-scopes']}`);
 
-  const list = await client.repos.listBranches()
+  const list = await client.repos.listBranches({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo
+  });
   console.log(`list = ${list}`);
   
   //   const repo = github.context.repo;
