@@ -12,25 +12,18 @@ async function run() {
   console.log(`githubToken = ${githubToken}`);
 
   const client = github.getOctokit(githubToken, {
+    baseUrl: 'https://api.github.com',
     log: {
-      debug: (message) => {
-        console.log(`debug: ${message}`);
-      },
-      info: (message) => {
-        console.log(`info: ${message}`);
-      },
-      warn: (message) => {
-        console.log(`warn: ${message}`);
-      },
-      error: (message) => {
-        console.log(`error: ${message}`);
-      }
+      debug: console.debug,
+      info : console.log,
+      warn : console.warn,
+      error: console.error
     }
   });
   console.log(`client = ${client}`);
 
-  const { headers } = await octokit.request('/');
-  console.log(`Scopes: ${headers['x-oauth-scopes']}`);
+  // const { headers } = await octokit.request('/');
+  // console.log(`Scopes: ${headers['x-oauth-scopes']}`);
 
   const list = await client.repos.listBranches()
   console.log(`list = ${list}`);
