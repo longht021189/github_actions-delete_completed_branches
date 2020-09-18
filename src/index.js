@@ -3,12 +3,19 @@ const github = require('@actions/github');
 
 async function run() {
   const masterName = core.getInput('master-name', { required: true });
-  const expiredTime = core.getInput('expired-time', { required: true });
-  const githubToken = core.getInput('github-token', { required: true });
-  const client = github.getOctokit(githubToken);
-  const list = await client.repos.listBranches()
+  console.log(`masterName = ${masterName}`);
 
-  console.log(`masterName = ${masterName}, expiredTime = ${expiredTime}, githubToken = ${githubToken}, list = ${list}`);
+  const expiredTime = core.getInput('expired-time', { required: true });
+  console.log(`expiredTime = ${expiredTime}`);
+
+  const githubToken = core.getInput('github-token', { required: true });
+  console.log(`githubToken = ${githubToken}`);
+
+  const client = github.getOctokit(githubToken);
+  console.log(`client = ${client}`);
+
+  const list = await client.repos.listBranches()
+  console.log(`list = ${list}`);
   
   //   const repo = github.context.repo;
   //   console.log(`Hello , !`);
