@@ -29,6 +29,9 @@ async function run() {
   });
   console.log(`client = ${client}`);
 
+  const { headers } = await octokit.request('/');
+  console.log(`Scopes: ${headers['x-oauth-scopes']}`);
+
   const list = await client.repos.listBranches()
   console.log(`list = ${list}`);
   

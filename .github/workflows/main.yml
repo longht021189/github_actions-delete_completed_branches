@@ -9,8 +9,8 @@ jobs:
     name: Clean old branches
     steps:
 
-    - name: Checkout
-      uses: actions/checkout@v2
+    # - name: Checkout
+    #   uses: actions/checkout@v2
 
     - name: Clean old branches with acions
       id: search_and_delete
