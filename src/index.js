@@ -30,14 +30,23 @@ async function run() {
 
   for (const branch of list) {
     if (branch.name != masterName) {
-      const data = await client.repos.compareCommits({
+      const data = (await client.repos.compareCommits({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         base: master.name,
         head: branch.name
-      });
+      })).data;
     
-      console.log(`data: ${JSON.stringify(data)}`);
+      console.log(`ahead_by: ${JSON.stringify(data.ahead_by)}`);
+      console.log(`behind_by: ${JSON.stringify(data.behind_by)}`);
+
+      const data2 = (await client.repos.getCommit({
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        ref: branch.commit.sha
+      })).data;
+
+      console.log(`data2: ${JSON.stringify(data2)}`);
     }
   }
 
