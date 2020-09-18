@@ -22,15 +22,22 @@ async function run() {
     repo: github.context.repo.repo
   })).data;
 
-  for (const value of list) {
-    if (value.name != masterName) {
-      const list2 = (await client.repos.listBranchesForHeadCommit({
+  const master = list.find(element => element.name === masterName);
+  if (master === undefined || master === undefined) {
+    core.setFailed(`${masterName} is not found!`);
+    return;
+  }
+
+  for (const branch of list) {
+    if (branch.name != masterName) {
+      const data = await client.repos.compareCommits({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
-        commit_sha: value.commit.sha
-      })).data;
+        base: master.name,
+        head: branch.name
+      });
     
-      console.log(`list2: ${JSON.stringify(list2)}`);
+      console.log(`data: ${JSON.stringify(data)}`);
     }
   }
 
