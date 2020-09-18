@@ -25,7 +25,7 @@ async function run() {
   const list2 = (await client.repos.listBranchesForHeadCommit({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
-    commit_sha: list[0].sha
+    commit_sha: list[0].commit.sha
   }));
 
   console.log(`list2: ${JSON.stringify(list2)}`);
