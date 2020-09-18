@@ -29,6 +29,6 @@ async function run() {
 }
 
 run().catch(error => {
-  console.log(`Error: ${error.message}\n${error}`);
+  console.log(`Error: ${error.message}\n${error}\n${typeof(error)}`);
   core.setFailed(error.message);
 });
