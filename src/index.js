@@ -3,7 +3,7 @@ const github = require('@actions/github');
 
 async function run() {
   const masterName = core.getInput('master-name', { required: true });
-  const expiredTime = core.getInput('expired-time', { required: true });
+  const expiredTime = core.getInput('expired-time', { required: true }) * 24 * 60 * 60 * 1000;
   const githubToken = core.getInput('github-token', { required: true });
   const client = github.getOctokit(githubToken);
 
@@ -30,23 +30,29 @@ async function run() {
 
   for (const branch of list) {
     if (branch.name != masterName) {
-      const data = (await client.repos.compareCommits({
-        owner: github.context.repo.owner,
-        repo: github.context.repo.repo,
-        base: master.name,
-        head: branch.name
-      })).data;
-    
-      console.log(`ahead_by: ${JSON.stringify(data.ahead_by)}`);
-      console.log(`behind_by: ${JSON.stringify(data.behind_by)}`);
-
-      const date = (await client.repos.getCommit({
+      const date = Date.parse((await client.repos.getCommit({
         owner: github.context.repo.owner,
         repo: github.context.repo.repo,
         ref: branch.commit.sha
-      })).data.commit.committer.date;
+      })).data.commit.committer.date);
 
       console.log(`date: ${JSON.stringify(date)}`);
+
+      const now = Date.now();
+
+      console.log(`now: ${JSON.stringify(now)}, ${now - date}`);
+
+      if (now - date > expiredTime) {
+        const data = (await client.repos.compareCommits({
+          owner: github.context.repo.owner,
+          repo: github.context.repo.repo,
+          base: master.name,
+          head: branch.name
+        })).data;
+      
+        console.log(`ahead_by: ${JSON.stringify(data.ahead_by)}`);
+        console.log(`behind_by: ${JSON.stringify(data.behind_by)}`);
+      }
     }
   }
 
