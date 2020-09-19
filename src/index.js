@@ -40,7 +40,7 @@ async function run() {
 
       const now = Date.now();
 
-      console.log(`now: ${JSON.stringify(now)}, ${now - date}`);
+      console.log(`now: ${JSON.stringify(now)}, ${now - date}, ${expiredTime}`);
 
       if (now - date > expiredTime) {
         const data = (await client.repos.compareCommits({
