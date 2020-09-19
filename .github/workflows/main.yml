@@ -18,7 +18,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         master-name: 'master'
-        expired-time: 31
+        expired-time: 1
 
     # - name: Get the output time
     #   run: echo "The time was ${{ steps.search_and_delete.outputs.time }}"
