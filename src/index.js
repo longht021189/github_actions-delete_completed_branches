@@ -47,7 +47,7 @@ async function run() {
         })).data;
 
         if (data.ahead_by == 0) {
-          const result = await client.repos.deleteBranchProtection({
+          const result = await client.repos.deleteAdminBranchProtection({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
             branch: branch.name
