@@ -50,7 +50,7 @@ async function run() {
           const result = await client.git.deleteRef({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            ref: branch.name
+            ref: `heads/${branch.name}`
           });
 
           console.log(`===> ${result}`);
