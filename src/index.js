@@ -36,11 +36,7 @@ async function run() {
         ref: branch.commit.sha
       })).data.commit.committer.date);
 
-      console.log(`date: ${JSON.stringify(date)}`);
-
       const now = Date.now();
-
-      console.log(`now: ${JSON.stringify(now)}, ${now - date}, ${expiredTime}`);
 
       if (now - date > expiredTime) {
         const data = (await client.repos.compareCommits({
@@ -49,15 +45,19 @@ async function run() {
           base: master.name,
           head: branch.name
         })).data;
-      
-        console.log(`ahead_by: ${JSON.stringify(data.ahead_by)}`);
-        console.log(`behind_by: ${JSON.stringify(data.behind_by)}`);
+
+        if (data.ahead_by == 0) {
+          const result = await client.repos.deleteBranchProtection({
+            owner: github.context.repo.owner,
+            repo: github.context.repo.repo,
+            branch: branch.name
+          });
+
+          console.log(`===> ${result}`);
+        }
       }
     }
   }
-
-  // const payload = JSON.stringify(github.context.payload, undefined, 2)
-  // console.log(`The event payload: ${payload}`);
 }
 
 run().catch(error => {
