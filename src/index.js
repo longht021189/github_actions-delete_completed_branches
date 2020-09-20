@@ -47,10 +47,10 @@ async function run() {
         })).data;
 
         if (data.ahead_by == 0) {
-          const result = await client.repos.deleteAdminBranchProtection({
+          const result = await client.git.deleteRef({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
-            branch: branch.name
+            ref: branch.name
           });
 
           console.log(`===> ${result}`);
