@@ -53,7 +53,7 @@ async function run() {
             ref: `heads/${branch.name}`
           });
 
-          console.log(`===> ${result}`);
+          console.log(`===> ${JSON.stringify(result)}`);
         }
       }
     }
